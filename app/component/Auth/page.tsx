@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import auth from "../Data/auth.json";
 
-const Auth: React.FC = () => {
+const Auth = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +20,7 @@ const Auth: React.FC = () => {
       // Set authenticated flag in session storage
       sessionStorage.setItem("authenticated", "true");
       // Redirect to dashboard after login
-      router.push("component/ProducTable/");
+      router.push("component/ProductTable/");
     } else {
       setError("Invalid username or password");
     }

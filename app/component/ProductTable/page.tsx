@@ -4,12 +4,6 @@ import axios from "axios";
 import Image from "next/image";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
-interface Product {
-  id: number;
-  title: string;
-  image: string;
-}
-
 const ProductTable = () => {
   const [products, setProducts] = useState([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -29,7 +23,7 @@ const ProductTable = () => {
     fetchData();
   }, []);
 
-  const handleCellClick = (rowIndex: number, image: string) => {
+  const handleCellClick = (rowIndex: any, image: string) => {
     setSelectedImage(image);
     setFocusedRowIndex(rowIndex);
   };
@@ -70,7 +64,6 @@ const ProductTable = () => {
       <DataGrid
         rows={products}
         columns={columns}
-        pageSize={5}
         checkboxSelection={false}
         paginationMode="server"
         disableColumnMenu
