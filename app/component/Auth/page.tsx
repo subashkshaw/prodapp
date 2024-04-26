@@ -9,7 +9,8 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = (e: any) => {
+    e.preventDefault(); // Prevent form submission
     const user = auth.find(
       (user) => user.username === username && user.password === password
     );
@@ -19,10 +20,21 @@ const Auth = () => {
       sessionStorage.setItem("user", JSON.stringify(user));
       // Set authenticated flag in session storage
       sessionStorage.setItem("authenticated", "true");
-      // Redirect to dashboard after login
-      router.push("component/ProductTable/");
+      // Redirect to home after login
+      router.replace("/component/ProductTable"); // Use router.replace for sensitive pages
     } else {
       setError("Invalid username or password");
+    }
+  };
+
+  const handleInputChange = (e: any) => {
+    // Reset error state when user starts typing
+    setError("");
+    // Update username or password state based on input field
+    if (e.target.name === "username") {
+      setUsername(e.target.value);
+    } else if (e.target.name === "password") {
+      setPassword(e.target.value);
     }
   };
   return (

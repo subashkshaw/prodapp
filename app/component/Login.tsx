@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import auth from "../component/Data/auth.json";
+import auth from "./Data/auth.json";
 import { useRouter } from "next/router";
 
 const Wrapper = styled.div`

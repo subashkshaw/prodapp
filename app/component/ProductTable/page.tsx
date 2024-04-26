@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const ProductTable = () => {
   const [products, setProducts] = useState([]);
@@ -10,6 +12,12 @@ const ProductTable = () => {
   const [focusedRowIndex, setFocusedRowIndex] = useState<number>(0);
   const [focusedCellIndex, setFocusedCellIndex] = useState<number>(0);
 
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // Clear session cookie on logout
+    router.push("/"); // Using router.navigate instead of router.push
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -59,27 +67,37 @@ const ProductTable = () => {
   ];
 
   return (
-    <div className="flex justify-between p-2">
-      <DataGrid
-        rows={products}
-        columns={columns}
-        checkboxSelection={false}
-        paginationMode="server"
-        disableColumnMenu
-        disableColumnFilter
-        disableColumnSelector
-        disableRowSelectionOnClick
-        onCellClick={(params) =>
-          handleCellClick(params.rowNode, params.row.image)
-        }
-        className="MuiDataGrid-root"
-      />
-      {selectedImage && (
-        <div>
-          <Image src={selectedImage} alt="Product" width={500} height={300} />
-        </div>
-      )}
-    </div>
+    <>
+      <div className="flex justify-end p-2 ">
+        <button
+          className="bg-pink-400 p-2 rounded text-white font-bold shadow"
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
+      </div>
+      <div className="flex justify-between p-2 bg-white ">
+        <DataGrid
+          rows={products}
+          columns={columns}
+          checkboxSelection={false}
+          paginationMode="server"
+          disableColumnMenu
+          disableColumnFilter
+          disableColumnSelector
+          disableRowSelectionOnClick
+          onCellClick={(params) =>
+            handleCellClick(params.rowNode, params.row.image)
+          }
+          className="MuiDataGrid-root"
+        />
+        {selectedImage && (
+          <div>
+            <Image src={selectedImage} alt="Product" width={500} height={300} />
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
