@@ -46,7 +46,7 @@ const ProductTable = () => {
     }
   };
 
-  const columns: GridColDef[] = [
+  const columns: GridColDef<any>[] = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "title", headerName: "Title", width: 200 },
     {
@@ -69,9 +69,9 @@ const ProductTable = () => {
         disableColumnMenu
         disableColumnFilter
         disableColumnSelector
-        disableSelectionOnClick
+        disableRowSelectionOnClick
         onCellClick={(params) =>
-          handleCellClick(params.rowIndex, params.row.image)
+          handleCellClick(params.rowNode, params.row.image)
         }
         onKeyDown={handleKeyDown}
         autoFocus
@@ -79,7 +79,7 @@ const ProductTable = () => {
       />
       {selectedImage && (
         <div>
-          <img src={selectedImage} alt="Product" width={500} height={300} />
+          <Image src={selectedImage} alt="Product" width={500} height={300} />
         </div>
       )}
     </div>
