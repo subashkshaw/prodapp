@@ -1,10 +1,9 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import auth from "../Data/auth.json";
 
-const Auth = () => {
+const Auth: React.FC = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +17,10 @@ const Auth = () => {
     if (user) {
       // Simulate successful login by storing user info in session storage
       sessionStorage.setItem("user", JSON.stringify(user));
-      router.push("component/ProductTable/"); // Redirect to dashboard after login
+      // Set authenticated flag in session storage
+      sessionStorage.setItem("authenticated", "true");
+      // Redirect to dashboard after login
+      router.push("component/ProducTable/");
     } else {
       setError("Invalid username or password");
     }

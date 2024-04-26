@@ -11,7 +11,7 @@ interface Product {
 }
 
 const ProductTable = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [focusedRowIndex, setFocusedRowIndex] = useState<number>(0);
   const [focusedCellIndex, setFocusedCellIndex] = useState<number>(0);
@@ -19,9 +19,7 @@ const ProductTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<Product[]>(
-          "https://fakestoreapi.com/products"
-        );
+        const response = await axios.get("https://fakestoreapi.com/products");
         setProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
