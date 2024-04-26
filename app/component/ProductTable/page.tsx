@@ -22,7 +22,6 @@ const ProductTable = () => {
 
     fetchData();
   }, []);
-
   const handleCellClick = (rowIndex: any, image: string) => {
     setSelectedImage(image);
     setFocusedRowIndex(rowIndex);
@@ -46,7 +45,7 @@ const ProductTable = () => {
     }
   };
 
-  const columns: GridColDef<any>[] = [
+  const columns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "title", headerName: "Title", width: 200 },
     {
@@ -73,8 +72,6 @@ const ProductTable = () => {
         onCellClick={(params) =>
           handleCellClick(params.rowNode, params.row.image)
         }
-        onKeyDown={handleKeyDown}
-        autoFocus
         className="MuiDataGrid-root"
       />
       {selectedImage && (
