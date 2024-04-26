@@ -16,6 +16,9 @@ const ProductTable = () => {
 
   const handleLogout = () => {
     // Clear session cookie on logout
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("authenticated");
+
     router.push("/"); // Using router.navigate instead of router.push
   };
   useEffect(() => {
